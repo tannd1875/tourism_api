@@ -8,9 +8,16 @@ const {
   getDirectionByTitle,
   getDirectionList,
   getDirectionListByPage,
+  getDirectionListByClassification,
+  getProvinceList,
+  getClassifyList,
 } = require("../controllers/direction.controller");
 
 router.get("/", getDirectionList);
+
+router.get("/province", getProvinceList);
+
+router.get("/classification", getClassifyList);
 
 router.get("/address", getDirectionByAddress);
 
@@ -20,11 +27,8 @@ router.get("/address_title", getDirectionByAddressAndTitle);
 
 router.get("/page/:page", getDirectionListByPage);
 
+router.get("/classify", getDirectionListByClassification);
+
 router.get("/:id", getDirection);
-// router.post("/", createDirection);
-
-// router.delete("/:id", deleteDirection);
-
-// router.put("/:id", updateDirection);
 
 module.exports = router;

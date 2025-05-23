@@ -7,5 +7,3 @@ function removeVietnameseTones(str) {
 }
 
 module.exports = { removeVietnameseTones };
-
-// tìm với tiếng việt không dấu

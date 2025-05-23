@@ -93,6 +93,53 @@ const getDirectionListByPage = async (req, res) => {
   }
 };
 
+const getDirectionListByClassification = async (req, res) => {
+  try {
+    const { classify } = req.query;
+    console.log(req.params, req.query);
+    const directionList = await directionModel.find({
+      classify: { $regex: classify },
+    });
+    if (!directionList) {
+      res.status(404).json("No direction found!");
+    }
+    res.status(200).send(directionList);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+const getProvinceList = async (req, res) => {
+  try {
+    const directionList = await directionModel.find({});
+    if (!directionList) {
+      res.status(404).json("No direction found!");
+    }
+    const provinceList = Object.values(directionList).map((dt) => {
+      return dt.address;
+    });
+    const setProvince = new Set(provinceList);
+    res.status(200).send([...setProvince]);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+const getClassifyList = async (req, res) => {
+  try {
+    const directionList = await directionModel.find({});
+    if (!directionList) {
+      res.status(404).json("No direction found!");
+    }
+    const classifyList = Object.values(directionList).map((dt) => {
+      return dt.classify;
+    });
+    const setClassify = new Set(classifyList);
+    res.status(200).send([...setClassify]);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
 module.exports = {
   getDirection,
   getDirectionList,
@@ -100,4 +147,7 @@ module.exports = {
   getDirectionByAddressAndTitle,
   getDirectionByTitle,
   getDirectionListByPage,
+  getDirectionListByClassification,
+  getProvinceList,
+  getClassifyList,
 };
