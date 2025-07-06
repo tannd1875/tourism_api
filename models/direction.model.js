@@ -4,39 +4,38 @@ const DirectionSchema = mongoose.Schema(
   {
     title: {
       type: String,
-      require: true,
+      required: true,
     },
-
-    address: {
+    province: {
+      type: mongoose.Schema.ObjectId,
+      ref: "Province",
+      required: true,
+    },
+    detailAddress: {
       type: String,
-      require: true,
+      required: true,
+      trim: true,
     },
-
     classify: {
-      type: String,
-      require: true,
-      enum: [
-        "Danh lam thắng cảnh",
-        "Di tích lịch sử",
-        "Khu vui chơi giải trí",
-        "Trung tâm thương mại",
-      ],
+      type: mongoose.Schema.ObjectId,
+      ref: "DirectionCategory",
+      required: true,
     },
 
     price: {
       type: Number,
-      require: true,
+      required: true,
       default: 0,
     },
 
     images: {
       type: [String],
-      require: true,
+      required: true,
     },
 
     description: {
       type: [String],
-      require: true,
+      required: true,
     },
   },
   {

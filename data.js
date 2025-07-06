@@ -243,4 +243,529 @@ const tipList = [
     ],
   },
 ];
-module.exports = { directionList, tipList };
+
+const products = [
+  {
+    name: "Lều cắm trại 2 người Coleman Sundome",
+    brand: "Coleman",
+    description:
+      "Lều 2 người thiết kế dome cổ điển, dễ lắp đặt trong 10 phút. Chống thấm nước với công nghệ WeatherTec, có cửa sổ thông gió. Kích thước: 2.1m x 1.4m.",
+    price: 1890000,
+    images: [
+      "https://images.unsplash.com/photo-1504851149312-7a075b496cc5?ixlib=rb-4.0.3&w=800&q=80",
+      "https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?ixlib=rb-4.0.3&w=800&q=80",
+    ],
+    stock: 35,
+  },
+  {
+    name: "Lều 4 người North Face Wawona 4",
+    brand: "The North Face",
+    description:
+      "Lều gia đình cao cấp cho 4 người với thiết kế 2 phòng riêng biệt. Chống thấm hoàn toàn, có sảnh lớn để đựng đồ. Chiều cao đỉnh 1.8m, rất thoải mái.",
+    price: 8500000,
+    images: [
+      "https://images.unsplash.com/photo-1471115853179-bb1d604434e0?ixlib=rb-4.0.3&w=800&q=80",
+      "https://picsum.photos/800/600?random=1",
+    ],
+    stock: 15,
+  },
+  {
+    name: "Lều 1 người Big Agnes Fly Creek HV UL1",
+    brand: "Big Agnes",
+    description:
+      "Lều siêu nhẹ cho 1 người, chỉ nặng 907g. Thiết kế freestanding, có 2 cửa ra vào. Phù hợp cho backpacking và trekking đường dài.",
+    price: 6200000,
+    images: [
+      "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?ixlib=rb-4.0.3&w=800&q=80",
+      "https://picsum.photos/800/600?random=2",
+    ],
+    stock: 28,
+  },
+  {
+    name: "Lều 3 người MSR Hubba Hubba NX",
+    brand: "MSR",
+    description:
+      "Lều 3 mùa cho 3 người với thiết kế 2 cửa và 2 vestibule. Nội thất rộng rãi với chiều cao 1.04m. Vật liệu 20D ripstop nylon siêu nhẹ.",
+    price: 7800000,
+    images: [
+      "https://images.unsplash.com/photo-1487730116645-74489c95b41b?ixlib=rb-4.0.3&w=800&q=80",
+      "https://picsum.photos/800/600?random=3",
+    ],
+    stock: 22,
+  },
+  {
+    name: "Lều gia đình 6 người Coleman Instant Tent",
+    brand: "Coleman",
+    description:
+      "Lều gia đình lớn lắp đặt tức thì trong 60 giây. Có đèn LED tích hợp, phòng riêng biệt, và sảnh lớn. Kích thước: 3m x 3m x 2m.",
+    price: 4500000,
+    images: [
+      "https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?ixlib=rb-4.0.3&w=800&q=80",
+      "https://picsum.photos/800/600?random=4",
+    ],
+    stock: 18,
+  },
+  {
+    name: "Lều 2 người Marmot Tungsten 2P",
+    brand: "Marmot",
+    description:
+      "Lều 3 mùa chất lượng cao với thiết kế freestanding. Có 2 vestibule lớn, nội thất màu sáng, dễ nhìn. Chống thấm 1500mm.",
+    price: 5400000,
+    images: [
+      "https://images.unsplash.com/photo-1504851149312-7a075b496cc5?ixlib=rb-4.0.3&w=800&q=80",
+      "https://picsum.photos/800/600?random=5",
+    ],
+    stock: 31,
+  },
+  {
+    name: "Lều tunnel 4 người Hilleberg Keron 4",
+    brand: "Hilleberg",
+    description:
+      "Lều tunnel 4 mùa chuyên nghiệp cho điều kiện khắc nghiệt. Vải Kerlon 1800 siêu bền, chống gió >25m/s. Thiết kế Low-profile.",
+    price: 18500000,
+    images: [
+      "https://images.unsplash.com/photo-1471115853179-bb1d604434e0?ixlib=rb-4.0.3&w=800&q=80",
+      "https://picsum.photos/800/600?random=6",
+    ],
+    stock: 8,
+  },
+  {
+    name: "Lều bãi biển pop-up Pacific Breeze",
+    brand: "Pacific Breeze",
+    description:
+      "Lều bãi biển tự bung, lắp đặt tức thì. Có túi cát chống gió, UPF 50+ chống tia UV. Kích thước mở: 2.4m x 1.2m x 1m.",
+    price: 1250000,
+    images: [
+      "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?ixlib=rb-4.0.3&w=800&q=80",
+      "https://picsum.photos/800/600?random=7",
+    ],
+    stock: 45,
+  },
+  {
+    name: "Lều 1 người Naturehike Cloud-Up 1",
+    brand: "Naturehike",
+    description:
+      "Lều siêu nhẹ cho 1 người, trọng lượng chỉ 1.3kg. Thiết kế 2 lớp với flysheet riêng biệt. Giá tốt nhất trong phân khúc.",
+    price: 1890000,
+    images: [
+      "https://images.unsplash.com/photo-1487730116645-74489c95b41b?ixlib=rb-4.0.3&w=800&q=80",
+      "https://picsum.photos/800/600?random=8",
+    ],
+    stock: 52,
+  },
+  {
+    name: "Lều 2 người REI Co-op Quarter Dome SL 2",
+    brand: "REI Co-op",
+    description:
+      "Lều backpacking nhẹ với thiết kế asymmetrical. Có 2 cửa lớn và vestibule rộng. Vật liệu 15D nylon ripstop cao cấp.",
+    price: 4800000,
+    images: [
+      "https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?ixlib=rb-4.0.3&w=800&q=80",
+      "https://picsum.photos/800/600?random=9",
+    ],
+    stock: 26,
+  },
+  {
+    name: "Lều 3 người Kelty Late Start 3",
+    brand: "Kelty",
+    description:
+      "Lều car camping thoải mái với thiết kế cabin. Có sảnh lớn và cửa sổ panoramic. Chiều cao đỉnh 1.83m, rất thoáng.",
+    price: 3200000,
+    images: [
+      "https://images.unsplash.com/photo-1504851149312-7a075b496cc5?ixlib=rb-4.0.3&w=800&q=80",
+      "https://picsum.photos/800/600?random=10",
+    ],
+    stock: 33,
+  },
+  {
+    name: "Lều pyramid 1 người Six Moon Designs",
+    brand: "Six Moon Designs",
+    description:
+      "Lều pyramid siêu nhẹ với trekking pole. Thiết kế minimalist, trọng lượng chỉ 680g. Phù hợp cho thru-hiking.",
+    price: 3800000,
+    images: [
+      "https://images.unsplash.com/photo-1471115853179-bb1d604434e0?ixlib=rb-4.0.3&w=800&q=80",
+      "https://picsum.photos/800/600?random=11",
+    ],
+    stock: 19,
+  },
+  {
+    name: "Lều 4 người Eureka Copper Canyon 4",
+    brand: "Eureka",
+    description:
+      "Lều gia đình cabin với tường thẳng đứng. Chiều cao 1.83m, có gear loft và electrical cord port. Rất thoải mái cho gia đình.",
+    price: 3900000,
+    images: [
+      "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?ixlib=rb-4.0.3&w=800&q=80",
+      "https://picsum.photos/800/600?random=12",
+    ],
+    stock: 24,
+  },
+  {
+    name: "Lều 2 người Patagonia Houdini 2P",
+    brand: "Patagonia",
+    description:
+      "Lều cao cấp với vật liệu tái chế. Thiết kế bền vững, chống thấm tuyệt đối. Có 2 vestibule và thông gió tốt.",
+    price: 7200000,
+    images: [
+      "https://images.unsplash.com/photo-1487730116645-74489c95b41b?ixlib=rb-4.0.3&w=800&q=80",
+      "https://picsum.photos/800/600?random=13",
+    ],
+    stock: 16,
+  },
+  {
+    name: "Lều 8 người Coleman Red Canyon",
+    brand: "Coleman",
+    description:
+      "Lều gia đình khổng lồ cho 8 người. Có 2 phòng riêng biệt và sảnh trung tâm. Kích thước: 4.3m x 2.4m x 1.8m.",
+    price: 5800000,
+    images: [
+      "https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?ixlib=rb-4.0.3&w=800&q=80",
+      "https://picsum.photos/800/600?random=14",
+    ],
+    stock: 12,
+  },
+  {
+    name: "Lều bivy Outdoor Research Alpine",
+    brand: "Outdoor Research",
+    description:
+      "Lều bivy 1 người cho climbing và mountaineering. Thiết kế minimalist, chống thấm hoàn toàn. Trọng lượng chỉ 580g.",
+    price: 4200000,
+    images: [
+      "https://images.unsplash.com/photo-1504851149312-7a075b496cc5?ixlib=rb-4.0.3&w=800&q=80",
+      "https://picsum.photos/800/600?random=15",
+    ],
+    stock: 21,
+  },
+  {
+    name: "Lều 3 người NEMO Dragonfly 3P",
+    brand: "NEMO",
+    description:
+      "Lều backpacking spacious với thiết kế độc đáo. Có 2 cửa lớn và vestibule asymmetric. Nội thất rộng rãi bất ngờ.",
+    price: 6800000,
+    images: [
+      "https://images.unsplash.com/photo-1471115853179-bb1d604434e0?ixlib=rb-4.0.3&w=800&q=80",
+      "https://picsum.photos/800/600?random=16",
+    ],
+    stock: 27,
+  },
+  {
+    name: "Lều 2 người Zpacks Duplex",
+    brand: "Zpacks",
+    description:
+      "Lều ultralight cho 2 người, chỉ nặng 590g. Vật liệu Dyneema siêu nhẹ và bền. Thiết kế trekking pole tent.",
+    price: 8900000,
+    images: [
+      "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?ixlib=rb-4.0.3&w=800&q=80",
+      "https://picsum.photos/800/600?random=17",
+    ],
+    stock: 14,
+  },
+  {
+    name: "Lều 5 người Kelty Grand Mesa 5",
+    brand: "Kelty",
+    description:
+      "Lều gia đình 3 mùa cho 5 người. Thiết kế dome với 2 cửa và vestibule. Dễ lắp đặt, giá cả phải chăng.",
+    price: 4100000,
+    images: [
+      "https://images.unsplash.com/photo-1487730116645-74489c95b41b?ixlib=rb-4.0.3&w=800&q=80",
+      "https://picsum.photos/800/600?random=18",
+    ],
+    stock: 29,
+  },
+  {
+    name: "Lều winter 2 người Mountain Hardwear Trango 4",
+    brand: "Mountain Hardwear",
+    description:
+      "Lều 4 mùa chuyên nghiệp cho điều kiện băng tuyết. Thiết kế geodesic cực kỳ bền vững. Chịu được gió > 30m/s.",
+    price: 12500000,
+    images: [
+      "https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?ixlib=rb-4.0.3&w=800&q=80",
+      "https://picsum.photos/800/600?random=19",
+    ],
+    stock: 11,
+  },
+  {
+    name: "Lều rooftop Thule Tepui Explorer Series",
+    brand: "Thule",
+    description:
+      "Lều rooftop cho xe hơi, lắp trên nóc xe. Mở ra trong 5 phút, có matras tích hợp. Chịu được mọi thời tiết.",
+    price: 25000000,
+    images: [
+      "https://images.unsplash.com/photo-1504851149312-7a075b496cc5?ixlib=rb-4.0.3&w=800&q=80",
+      "https://picsum.photos/800/600?random=20",
+    ],
+    stock: 6,
+  },
+  {
+    name: "Lều hamac Hennesy Hammock Explorer",
+    brand: "Hennesy Hammock",
+    description:
+      "Lều võng với bạt phủ tích hợp. Có lưới chống muỗi và rainfly riêng. Thiết kế asymmetric thoải mái.",
+    price: 3600000,
+    images: [
+      "https://images.unsplash.com/photo-1471115853179-bb1d604434e0?ixlib=rb-4.0.3&w=800&q=80",
+      "https://picsum.photos/800/600?random=21",
+    ],
+    stock: 23,
+  },
+
+  // ==================== TÚI NGỦ (SLEEPING BAGS) - 22 sản phẩm ====================
+  {
+    name: "Túi ngủ Coleman Brazos Cold Weather",
+    brand: "Coleman",
+    description:
+      "Túi ngủ chịu lạnh đến -7°C, thiết kế rectangular thoải mái. Lót Coletherm cho cách nhiệt tốt. Có thể ghép đôi thành túi đôi.",
+    price: 1450000,
+    images: [
+      "https://images.unsplash.com/photo-1544966503-7cc5ac882d5e?ixlib=rb-4.0.3&w=800&q=80",
+      "https://picsum.photos/800/600?random=22",
+    ],
+    stock: 42,
+  },
+  {
+    name: "Túi ngủ lông vũ Western Mountaineering Ultralite",
+    brand: "Western Mountaineering",
+    description:
+      "Túi ngủ lông vũ cao cấp, nhiệt độ comfort -1°C. Lông vũ 850+ fill power, trọng lượng chỉ 1.1kg. Thiết kế mummy.",
+    price: 8900000,
+    images: [
+      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&w=800&q=80",
+      "https://picsum.photos/800/600?random=23",
+    ],
+    stock: 18,
+  },
+  {
+    name: "Túi ngủ Marmot Trestles Elite Eco 20",
+    brand: "Marmot",
+    description:
+      "Túi ngủ tổng hợp thân thiện môi trường, nhiệt độ -6°C. Lót SpiraFil Eco từ plastic tái chế. Thiết kế semi-rectangular.",
+    price: 3200000,
+    images: [
+      "https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?ixlib=rb-4.0.3&w=800&q=80",
+      "https://picsum.photos/800/600?random=24",
+    ],
+    stock: 35,
+  },
+  {
+    name: "Túi ngủ The North Face Furnace 20",
+    brand: "The North Face",
+    description:
+      "Túi ngủ lông vũ compact, nhiệt độ -6°C. Lông vũ 600-fill ProDown, chống thấm. Có hood điều chỉnh được.",
+    price: 4800000,
+    images: [
+      "https://images.unsplash.com/photo-1544966503-7cc5ac882d5e?ixlib=rb-4.0.3&w=800&q=80",
+      "https://picsum.photos/800/600?random=25",
+    ],
+    stock: 28,
+  },
+  {
+    name: "Túi ngủ trẻ em Kelty Big Dipper 30",
+    brand: "Kelty",
+    description:
+      "Túi ngủ thiết kế riêng cho trẻ em, nhiệt độ -1°C. Có thể điều chỉnh chiều dài theo độ tuổi. Họa tiết vui nhộn.",
+    price: 2100000,
+    images: [
+      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&w=800&q=80",
+      "https://picsum.photos/800/600?random=26",
+    ],
+    stock: 31,
+  },
+  {
+    name: "Túi ngủ REI Co-op Magma 15",
+    brand: "REI Co-op",
+    description:
+      "Túi ngủ lông vũ chất lượng cao, nhiệt độ -9°C. Lông vũ 850-fill, vỏ ngoài 10D nylon. Trọng lượng 1.25kg.",
+    price: 5400000,
+    images: [
+      "https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?ixlib=rb-4.0.3&w=800&q=80",
+      "https://picsum.photos/800/600?random=27",
+    ],
+    stock: 24,
+  },
+  {
+    name: "Túi ngủ Big Agnes Anvil Horn 15",
+    brand: "Big Agnes",
+    description:
+      "Túi ngủ lông vũ với PertiX Shield fabric. Nhiệt độ -9°C, có FireLine ECO lót tổng hợp. Thiết kế spoon shape thoải mái.",
+    price: 6200000,
+    images: [
+      "https://images.unsplash.com/photo-1544966503-7cc5ac882d5e?ixlib=rb-4.0.3&w=800&q=80",
+      "https://picsum.photos/800/600?random=28",
+    ],
+    stock: 22,
+  },
+  {
+    name: "Túi ngủ siêu nhẹ Sea to Summit Spark SpI",
+    brand: "Sea to Summit",
+    description:
+      "Túi ngủ lông vũ siêu nhẹ 485g, nhiệt độ 5°C. Lông vũ 850+ fill, thiết kế ultralight cho fastpacking. Nén được rất nhỏ.",
+    price: 7800000,
+    images: [
+      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&w=800&q=80",
+      "https://picsum.photos/800/600?random=29",
+    ],
+    stock: 19,
+  },
+  {
+    name: "Túi ngủ đôi Kelty Tru.Comfort Doublewide",
+    brand: "Kelty",
+    description:
+      "Túi ngủ đôi cho 2 người, nhiệt độ 4°C. Có 2 zipper riêng biệt, có thể tách thành 2 túi đơn. Kích thước rộng rãi.",
+    price: 4500000,
+    images: [
+      "https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?ixlib=rb-4.0.3&w=800&q=80",
+      "https://picsum.photos/800/600?random=30",
+    ],
+    stock: 16,
+  },
+  {
+    name: "Túi ngủ Patagonia 850 Down Sleeping Bag",
+    brand: "Patagonia",
+    description:
+      "Túi ngủ lông vũ bền vững, nhiệt độ -6°C. Lông vũ traceable down 850-fill, vỏ ngoài NetPlus từ lưới cá tái chế.",
+    price: 8500000,
+    images: [
+      "https://images.unsplash.com/photo-1544966503-7cc5ac882d5e?ixlib=rb-4.0.3&w=800&q=80",
+      "https://picsum.photos/800/600?random=31",
+    ],
+    stock: 14,
+  },
+  {
+    name: "Túi ngủ Naturehike Cloud 350",
+    brand: "Naturehike",
+    description:
+      "Túi ngủ tổng hợp giá rẻ, nhiệt độ 5°C. Trọng lượng 1.2kg, thiết kế envelope. Phù hợp cho camping mùa hè.",
+    price: 890000,
+    images: [
+      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&w=800&q=80",
+      "https://picsum.photos/800/600?random=32",
+    ],
+    stock: 58,
+  },
+  {
+    name: "Túi ngủ Mountain Hardwear Phantom 0°F",
+    brand: "Mountain Hardwear",
+    description:
+      "Túi ngủ lông vũ chuyên nghiệp cho điều kiện cực lạnh -18°C. Lông vũ 800-fill Q.Shield, thiết kế expedition.",
+    price: 12500000,
+    images: [
+      "https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?ixlib=rb-4.0.3&w=800&q=80",
+      "https://picsum.photos/800/600?random=33",
+    ],
+    stock: 9,
+  },
+  {
+    name: "Túi ngủ NEMO Disco 15",
+    brand: "NEMO",
+    description:
+      "Túi ngủ lông vũ với thiết kế spoon shape độc đáo. Nhiệt độ -9°C, có Thermo Gills điều hòa nhiệt độ. Rất thoải mái.",
+    price: 5900000,
+    images: [
+      "https://images.unsplash.com/photo-1544966503-7cc5ac882d5e?ixlib=rb-4.0.3&w=800&q=80",
+      "https://picsum.photos/800/600?random=34",
+    ],
+    stock: 26,
+  },
+  {
+    name: "Túi ngủ Feathered Friends Flicker 20",
+    brand: "Feathered Friends",
+    description:
+      "Túi ngủ lông vũ cao cấp handmade, nhiệt độ -6°C. Lông vũ 900+ fill power, thiết kế quilt-style với foot box.",
+    price: 9800000,
+    images: [
+      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&w=800&q=80",
+      "https://picsum.photos/800/600?random=35",
+    ],
+    stock: 12,
+  },
+  {
+    name: "Túi ngủ Enlightened Equipment Revelation",
+    brand: "Enlightened Equipment",
+    description:
+      "Quilt ultralight có thể dùng như túi ngủ, nhiệt độ -1°C. Lông vũ 850-fill, thiết kế modular. Trọng lượng 680g.",
+    price: 6800000,
+    images: [
+      "https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?ixlib=rb-4.0.3&w=800&q=80",
+      "https://picsum.photos/800/600?random=36",
+    ],
+    stock: 17,
+  },
+  {
+    name: "Túi ngủ Outdoor Research Alpine Bivy",
+    brand: "Outdoor Research",
+    description:
+      "Túi ngủ bivy chống thấm hoàn toàn, nhiệt độ 0°C. Thiết kế minimalist cho climbing. Có mosquito netting tại đầu.",
+    price: 4200000,
+    images: [
+      "https://images.unsplash.com/photo-1544966503-7cc5ac882d5e?ixlib=rb-4.0.3&w=800&q=80",
+      "https://picsum.photos/800/600?random=37",
+    ],
+    stock: 21,
+  },
+  {
+    name: "Túi ngủ Zpacks Classic 20°F",
+    brand: "Zpacks",
+    description:
+      "Túi ngủ lông vũ siêu nhẹ 570g, nhiệt độ -6°C. Vỏ ngoài Dyneema ultralight, lông vũ 900-fill. Thiết kế minimalist.",
+    price: 8900000,
+    images: [
+      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&w=800&q=80",
+      "https://picsum.photos/800/600?random=38",
+    ],
+    stock: 11,
+  },
+];
+
+const province = [
+  "Thành phố Hồ Chí Minh",
+  "Bình Dương",
+  "Bà Rịa - Vũng Tàu",
+  "Đồng Nai",
+];
+
+const classification = [
+  "Danh lam thắng cảnh",
+  "Di tích lịch sử",
+  "Khu vui chơi giải trí",
+  "Trung tâm thương mại",
+];
+
+const category = ["Lều", "Túi ngủ", "Đèn"];
+
+const brand = [
+  {
+    name: "MSR (Mountain Safety Research)",
+    country: "Mỹ",
+  },
+  {
+    name: "The North Face",
+    country: "Mỹ",
+  },
+  {
+    name: "Eureka",
+    country: "Mỹ",
+  },
+  {
+    name: "Decathlon",
+    country: "Pháp",
+  },
+  {
+    name: "Coleman",
+    country: "Mỹ",
+  },
+  {
+    name: "Black Diamond",
+    country: "Mỹ",
+  },
+];
+
+module.exports = {
+  directionList,
+  tipList,
+  products,
+  province,
+  classification,
+  category,
+  brand,
+};

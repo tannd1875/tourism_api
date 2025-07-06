@@ -1,8 +1,13 @@
 const express = require("express");
 const router = express.Router();
-const { getTip, getTipList } = require("../controllers/tip.controller");
+const {
+  getTip,
+  getTipList,
+  getRecommendTip,
+} = require("../controllers/tip.controller");
 
 router.get("/", getTipList);
+router.get("/recommend", getRecommendTip);
 router.get("/:id", getTip);
 
 // router.post("/", createTip);
