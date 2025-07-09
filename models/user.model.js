@@ -4,15 +4,15 @@ const UserSchema = mongoose.Schema(
   {
     username: {
       type: String,
-      require: true,
+      required: true,
     },
     email: {
       type: String,
-      require: true,
+      required: true,
     },
     password: {
       type: String,
-      require: true,
+      required: true,
     },
     phone: {
       type: String,
@@ -29,6 +29,12 @@ const UserSchema = mongoose.Schema(
     shippingAddress: {
       fullName: String,
       address: String,
+    },
+    role: {
+      type: String,
+      required: true,
+      enum: ["user", "admin"],
+      default: "user",
     },
   },
   {

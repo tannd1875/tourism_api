@@ -3,6 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 const directionRoute = require("./routes/direction.route");
 const tipRoute = require("./routes/tip.route");
 const userRoute = require("./routes/user.route");
@@ -14,10 +15,16 @@ const productCategoryRoute = require("./routes/product-category.route");
 const cartRoute = require("./routes/cart.route");
 
 //middleware
+app.use(cookieParser());
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
+app.use("/uploads", express.static("uploads"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
-app.use("/uploads", express.static("uploads"));
 
 //route
 app.use("/direction", directionRoute);

@@ -1,22 +1,13 @@
 const cartModel = require("../models/cart.model");
-const userModel = require("../models/user.model");
 
 const addProductToCart = async (req, res) => {
   try {
-    const { userId, accessToken, productId, quantity } = req.body;
-    const userCart = await cartModel.findOne({ user: userId });
-
-    // Check if userId and accessToken are provided
-    const dbAccessToken = await userModel
-      .findById(userId)
-      .select("accessToken");
-    if (dbAccessToken.accessToken !== accessToken) {
-      return res.status(401).json({ message: "Unauthorized!" });
-    }
-
     // Check if userCart does not exist => create a new cart, push the product into it
-    // / If userCart exists, check if the product already exists in the cart => plus the quantity
-    // / If the product does not exist in the cart, push the product into the cart
+    // If userCart exists, check if the product already exists in the cart => plus the quantity
+    // If the product does not exist in the cart, push the product into the cart
+    const { userId } = req.user;
+    const { productId, quantity } = req.body;
+    const userCart = await cartModel.findOne({ user: userId });
     if (!userCart) {
       const newCart = await cartModel.create({
         user: userId,
@@ -36,35 +27,21 @@ const addProductToCart = async (req, res) => {
       return res.status(200).json(updatedCart);
     }
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(401).json({ message: error.message });
   }
 };
 
 // update quantity
 const updateItemInCart = async (req, res) => {
   try {
-    let accessToken = "";
-    if (req.headers.authorization) {
-      accessToken = req.headers.authorization.split(" ")[1];
-    }
-    const { userId, items } = req.body;
-    console.log(userId, items);
+    const { userId } = req.user;
+    const { items } = req.body;
     const userCart = await cartModel.findOne({ user: userId });
-
-    // Check if userId and accessToken are provided
-    const dbAccessToken = await userModel
-      .findById(userId)
-      .select("accessToken");
-    if (dbAccessToken.accessToken !== accessToken) {
-      return res.status(401).json({ message: "Unauthorized!" });
-    }
-
     // If userCart exists, update items in the cart
     items.forEach((product) => {
       const existingItemIndex = userCart.items.findIndex(
         (item) => item.product.toString() === product.id
       );
-      console.log("Index", existingItemIndex);
       if (existingItemIndex > -1) {
         userCart.items[existingItemIndex].quantity = product.quantity;
       } else {
@@ -78,23 +55,13 @@ const updateItemInCart = async (req, res) => {
     const updatedCart = await userCart.save();
     return res.status(200).json(updatedCart);
   } catch (error) {
-    return res.status(500).json({ message: error.message });
+    return res.status(401).json({ message: error.message });
   }
 };
 
 const getUserCart = async (req, res) => {
   try {
-    const { userId } = req.params;
-    let accessToken = "";
-    if (req.headers.authorization) {
-      accessToken = req.headers.authorization.split(" ")[1];
-    }
-    // Check if userId and accessToken are provided
-    const user = await userModel.findById(userId);
-    if (user.accessToken !== accessToken) {
-      return res.status(401).json({ message: "Unauthorized!" });
-    }
-
+    const { userId } = req.user;
     const userCart = await cartModel
       .findOne({ user: userId })
       .populate("items.product", "name price images");
@@ -103,7 +70,7 @@ const getUserCart = async (req, res) => {
     }
     return res.status(200).json(userCart);
   } catch (error) {
-    return res.status(500).json({ message: error.message });
+    return res.status(401).json({ message: error.message });
   }
 };
 
@@ -118,26 +85,14 @@ const getCartList = async (req, res) => {
     }
     return res.status(200).json(carts);
   } catch (error) {
-    return res.status(500).json({ message: error.message });
+    return res.status(401).json({ message: error.message });
   }
 };
 
 const deleteItemFromCart = async (req, res) => {
   try {
-    const { userId, productId } = req.body;
-    let accessToken = "";
-    if (req.headers.authorization) {
-      accessToken = req.headers.authorization.split(" ")[1];
-    }
-
-    // Check if userId and accessToken are provided
-    const dbAccessToken = await userModel
-      .findById(userId)
-      .select("accessToken");
-    if (dbAccessToken.accessToken !== accessToken) {
-      return res.status(401).json({ message: "Unauthorized!" });
-    }
-
+    const { userId } = req.user;
+    const { productId } = req.body;
     const userCart = await cartModel.findOne({ user: userId });
     userCart.items = userCart.items.filter(
       (item) => item.product.toString() !== productId
@@ -145,7 +100,7 @@ const deleteItemFromCart = async (req, res) => {
     const updatedCart = await userCart.save();
     return res.status(200).json(updatedCart);
   } catch (error) {
-    return res.status(500).json({ message: error.message });
+    return res.status(401).json({ message: error.message });
   }
 };
 

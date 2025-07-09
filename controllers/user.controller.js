@@ -14,15 +14,21 @@ const authenticateUser = async (req, res) => {
       $or: [{ username: account }, { email: account }],
     });
     if (!user) {
-      return res.status(401).json({ message: "User not found!" });
+      return res.status(404).json({ message: "User not found!" });
     }
     const isValidPassword = await compare(password, user.password);
     if (!isValidPassword) {
-      return res.status(401).json({ message: "Invalid password!" });
+      return res.status(403).json({ message: "Invalid password!" });
     }
 
-    const accessToken = createAccessToken(user.id);
-    const refreshToken = createRefreshToken(user.id);
+    const accessToken = createAccessToken({
+      userId: user.id,
+      username: user.username,
+    });
+    const refreshToken = createRefreshToken({
+      userId: user.id,
+      username: user.username,
+    });
 
     await user.updateOne({
       accessToken: accessToken,
@@ -30,13 +36,15 @@ const authenticateUser = async (req, res) => {
     });
 
     sendRefreshToken(res, refreshToken);
-    sendAccessToken(res, {
+    const payload = sendAccessToken({
       id: user.id,
       username: user.username,
       email: user.email,
       accessToken: accessToken,
       avatar: user.avatar,
     });
+
+    res.status(200).json(payload);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -60,7 +68,7 @@ const createUser = async (req, res) => {
     if (!newUser) {
       return res.status(403).send("Failed to create user");
     } else {
-      return res.status(201).send("Create user success!");
+      return res.status(201).send("User created!");
     }
   } catch (error) {
     return res.status(500).json({ message: error.message });
