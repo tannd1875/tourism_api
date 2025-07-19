@@ -92,7 +92,8 @@ const logoutUser = async (req, res) => {
 
 const updateUser = async (req, res) => {
   try {
-    const { username, email, accessToken } = req.body;
+    const { userId } = req.user;
+    const { username, email } = req.body;
 
     let avatarURL = "";
     if (req.file) {
@@ -101,7 +102,7 @@ const updateUser = async (req, res) => {
       }`;
     }
 
-    const user = await UserModel.findOne({ accessToken: accessToken });
+    const user = await UserModel.findById(userId);
     if (!user) {
       return res.status(404).send("User not found!");
     }
